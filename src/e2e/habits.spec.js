@@ -1,11 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Habit Tracker E2E', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/');
-  });
 
   test('displays habit tracker title', async ({ page }) => {
+    await page.goto('/');
     await expect(page.getByRole('heading', { name: 'Habit Tracker' })).toBeVisible();
   });
 
@@ -14,6 +12,7 @@ test.describe('Habit Tracker E2E', () => {
       await route.fulfill({ json: [] });
     });
     
+    await page.goto('/');
     await expect(page.getByTestId('empty')).toBeVisible();
   });
 
@@ -30,6 +29,7 @@ test.describe('Habit Tracker E2E', () => {
       }
     });
 
+    await page.goto('/');
     await page.getByTestId('name-input').fill('Exercise');
     await page.getByTestId('description-input').fill('Daily workout');
     await page.getByTestId('submit-button').click();
@@ -51,10 +51,17 @@ test.describe('Habit Tracker E2E', () => {
 
     await page.route('**/api/habits/1/toggle', async (route) => {
       await route.fulfill({
-        json: { id: 1, completedDates: [today] },
+        json: { 
+          id: 1, 
+          name: 'Exercise', 
+          description: 'Workout', 
+          streak: 1, 
+          completedDates: [today] 
+        },
       });
     });
 
+    await page.goto('/');
     await page.waitForSelector('[data-testid="habit-card"]');
     await page.getByTestId('toggle-button').click();
 
@@ -76,6 +83,7 @@ test.describe('Habit Tracker E2E', () => {
       });
     });
 
+    await page.goto('/');
     await page.waitForSelector('[data-testid="badge"]');
     await expect(page.getByTestId('badge')).toContainText('30 days');
   });

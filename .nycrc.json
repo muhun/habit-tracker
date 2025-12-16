@@ -1,0 +1,14 @@
+{
+  "all": true,
+  "include": ["src/**/*.{js,jsx}"],
+  "exclude": [
+    "src/**/*.test.{js,jsx}",
+    "src/**/*.spec.{js,jsx}",
+    "src/**/*.stories.{js,jsx}",
+    "src/e2e/**/*",
+    "src/test/**/*",
+    "server/**/*"
+  ],
+  "reporter": ["text", "html", "json"],
+  "report-dir": "./coverage-e2e"
+}

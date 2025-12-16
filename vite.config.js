@@ -15,10 +15,10 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/test/setup.js',
-    exclude: ['**/node_modules/**', '**/e2e/**'],
+    exclude: ['**/node_modules/**', '**/e2e/**', '**/*.stories.*'],
     coverage: {
       include: ['src/**/*'],
-      exclude: ['server/**/*', '**/node_modules/**', '**/e2e/**', '**/*.test.*', '**/*.spec.*'],
+      exclude: ['server/**/*', '**/node_modules/**', '**/e2e/**', '**/*.test.*', '**/*.spec.*', '**/*.stories.*'],
       reporter: ['text', 'html', 'json'],
       reportsDirectory: './coverage'
     },
